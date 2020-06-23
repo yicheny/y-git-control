@@ -1,3 +1,8 @@
-const {copyDir} = require('./script');
+const {copyDirList} = require('./DirOpertion');
 
-copyDir('./', '../box1/src/project-share', );
+const targetList = [
+    '../box1/src/project-share',
+    '../box2/src/project-share',
+    '../box3/src/project-share',
+];
+copyDirList('./', targetList );

@@ -45,4 +45,13 @@ function copyDir(src, dist, callback=console.error) {
     }
 }
 
+function copyDirList(source,targetList,callback){
+    if(!Array.isArray(targetList)) console.log('targetList必须是数组');
+    targetList.forEach(target=>{
+        copyDir(source,target,callback);
+    });
+    console.log(`已成功复制到所有指定目录下！`);
+}
+
+exports.copyDirList = copyDirList;
 exports.copyDir = copyDir;
