@@ -31,13 +31,31 @@ function copyDir(src, dist, callback=console.error) {
     }
 }
 
+function delDir(path) {
+    let files = [];
+    if( fs.existsSync(path) ) {
+        files = fs.readdirSync(path);
+        files.forEach(function(file,index){
+            const curPath = ''.concat(path,"/",file);
+            if(fs.statSync(curPath).isDirectory()) {
+                delDir(curPath);
+            } else {
+                fs.unlinkSync(curPath);
+            }
+        });
+        fs.rmdirSync(path);
+    }
+}
+
 function copyDirList(source,targetList,callback){
     if(!Array.isArray(targetList)) console.log('targetList必须是数组');
     targetList.forEach(target=>{
         copyDir(source,target,callback);
+        // delDir(target);
     });
     console.log(`已成功复制到所有指定目录下！`);
 }
 
 exports.copyDirList = copyDirList;
 exports.copyDir = copyDir;
+exports.delDir = delDir;
