@@ -15,33 +15,19 @@ function copyDir(src, dist, callback=console.error) {
     });
 
     function _copy(err, src, dist) {
-        if(err){
-            callback(err);
-        } else {
-            fs.readdir(src, function(err, paths) {
-                if(err){
-                    callback(err)
-                } else {
-                    paths.forEach(function(path) {
-                        var _src = src + '/' +path;
-                        var _dist = dist + '/' +path;
-                        fs.stat(_src, function(err, stat) {
-                            if(err){
-                                callback(err);
-                            } else {
-                                // 判断是文件还是目录
-                                if(stat.isFile()) {
-                                    fs.writeFileSync(_dist, fs.readFileSync(_src));
-                                } else if(stat.isDirectory()) {
-                                    // 当是目录是，递归复制
-                                    copyDir(_src, _dist, callback)
-                                }
-                            }
-                        })
-                    })
-                }
+        if(err) return callback(err);
+        fs.readdir(src, function(err, paths) {
+            if(err) return callback(err);
+            paths.forEach(function(path) {
+                const _src = ''.concat(src,'/',path);
+                const _dist = ''.concat(dist,'/',path);
+                fs.stat(_src, function(err, stat) {
+                    if(err) return callback(err);
+                    if(stat.isFile()) return fs.writeFileSync(_dist, fs.readFileSync(_src));
+                    if(stat.isDirectory()) return copyDir(_src, _dist, callback);
+                })
             })
-        }
+        })
     }
 }
 
