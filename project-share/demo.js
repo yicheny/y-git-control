@@ -6,8 +6,12 @@ const targetList = [
     '../box3/src/project-share',
 ];
 
+const ignoreList = [
+    './node_modules'
+];
+
 const commitCount = 1;
 
 // console.log(__dirname);
 
-copyDirList('./', targetList );
+copyDirList('.', targetList,ignoreList);
