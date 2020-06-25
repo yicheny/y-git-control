@@ -11,12 +11,20 @@ const ignoreList = [
     './node_modules'
 ];
 
-const commitCount = 20;
+const commitCount = 0;
+const commitInfo = `测试脚本 提交target目录 第${commitCount}次提交！`;
 
-const commitInfo = `测试脚本 第${commitCount}次提交！`;
-
-exec_order(`git commit -am "${commitInfo}"`);
-
-// console.log(__dirname);
-
+// sourceCommit(commitInfo);
 // copyDirList('.', targetList,ignoreList);
+targetCommit(targetList[0],commitInfo);
+// targetCommit(targetList[1],commitInfo);
+
+async function sourceCommit(info) {
+    await exec_order(`git commit -am "${info}"`);
+}
+
+async function targetCommit(path,info){
+    process.chdir(path);
+    await exec_order(`git commit -am "${info}"`);
+    process.chdir(__dirname);
+}
