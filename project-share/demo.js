@@ -14,7 +14,7 @@ const ignoreList = [
 const commitCount = 0;
 const commitInfo = `测试脚本 提交target目录 第${commitCount}次提交！`;
 
-copyDirList('.', targetList,ignoreList);
+// copyDirList('.', targetList,ignoreList);
 sourceCommit(commitInfo);
 // targetCommit(targetList[0],commitInfo);
 
