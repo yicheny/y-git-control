@@ -14,17 +14,16 @@ const ignoreList = [
 const commitCount = 0;
 const commitInfo = `测试脚本 提交target目录 第${commitCount}次提交！`;
 
-// sourceCommit(commitInfo);
-// copyDirList('.', targetList,ignoreList);
-targetCommit(targetList[0],commitInfo);
-// targetCommit(targetList[1],commitInfo);
+copyDirList('.', targetList,ignoreList);
+sourceCommit(commitInfo);
+// targetCommit(targetList[0],commitInfo);
 
 async function sourceCommit(info) {
     await exec_order(`git commit -am "${info}"`);
 }
 
-async function targetCommit(path,info){
-    process.chdir(path);
-    await exec_order(`git commit -am "${info}"`);
-    process.chdir(__dirname);
-}
+// async function targetCommit(path,info){
+//     process.chdir(path);
+//     await exec_order(`git commit -am "${info}"`);
+//     process.chdir(__dirname);
+// }
