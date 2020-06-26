@@ -1,5 +1,5 @@
 const {exec} = require('child_process');
-const iconv = require('iconv-lite');
+const iconv = require('iconv-lite/lib/index');
 
 function exec_order(order, info, callback =()=>{}) {
     let LOG_INFO = '';
