@@ -1,3 +1,3 @@
-const {superOrder} = require('./scripts/scripts_svn_simple');
+const {superOrder} = require('../scripts/scripts_svn_simple');
 
 superOrder(require('./Setting'),__dirname);
