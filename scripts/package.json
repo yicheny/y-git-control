@@ -1,0 +1,24 @@
+{
+  "name": "y-project-share",
+  "version": "0.0.3",
+  "description": "svn version-control project",
+  "main": "index",
+  "scripts": {
+    "upload": "npm publish --registry http://registry.npmjs.org"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yicheny/y-git-control.git"
+  },
+  "keywords": [
+    "svn",
+    "version-control",
+    "project-share"
+  ],
+  "author": "ylvfeng",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yicheny/y-git-control/issues"
+  },
+  "homepage": "https://github.com/yicheny/y-git-control#readme"
+}

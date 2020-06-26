@@ -1,5 +1,5 @@
-const {copyDirListSync} = require('../scripts/DirOpertion');
-const {exec_order} = require('../scripts/Execute');
+const {copyDirListSync} = require('../scripts/src/DirOpertion');
+const {exec_order} = require('../scripts/src/Execute');
 
 // copyDirListSync('.', targetList,ignoreList);
 // targetCommit(targetList[0],commitInfo);
