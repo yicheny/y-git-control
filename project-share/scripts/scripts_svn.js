@@ -6,14 +6,26 @@ async function addAndCommit(info){
     await exec_order(`svn commit -m "${info}"`);
 }
 
-async function targetListCommit(source,targets,info){
+async function delFile(path){
+    await exec_order(`svn del ${path}`);
+}
+
+async function commonCommit(delPaths,info){
+    for(let i=0;i<delPaths.length;i++){
+        await delFile(delPaths[i]);
+    }
+    await addAndCommit(info);
+}
+
+async function targetListCommit(ops={}){
+    const {source,targets,info,delPaths} = ops;
     for(let i=0;i<targets.length;i++){
         const path = targets[i];
         process.chdir(path);
-        await addAndCommit(info);
+        await commonCommit(delPaths,info);
         process.chdir(source);
     }
 }
 
-exports.addAndCommit = addAndCommit;
+exports.sourceCommit = commonCommit;
 exports.targetListCommit = targetListCommit;

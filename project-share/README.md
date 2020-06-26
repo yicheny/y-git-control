@@ -10,12 +10,14 @@
 
 # 使用
 ## svn
->  缺陷：不能在版本上进行已删除文件的提交
+> 已支持版本上进行已删除文件的提交【注意，文件改名同样是删除操作】
+> 尚未测试版本上多文件删除的提交
+> 尚未测试版本上目录删除的提交
 
 数据（定义Setting.json文件）
 ```
 {
-  "commitInfo": "测试脚本 提交target目录 第9次提交！",
+  "commitInfo": "测试脚本 提交target目录 第13次提交！",
   "sourcePath": ".",
   "targetList": [
     "../box1/src/project-share",
@@ -24,24 +26,24 @@
   ],
   "ignoreList": [
     "./node_modules"
-  ]
+  ],
+  "delList": []
 }
 ```
 
 指令
 ```
-const {copyDirListSync} = require('./scripts/DirOpertion');
-const {addAndCommit,targetListCommit} = require('./scripts/scripts_svn');
+const {superOrder} = require('./scripts/scripts_svn_simple');
 
-main();
-
-async function main(){
-    const {targetList,ignoreList,commitInfo,sourcePath} = require('./Setting');
-    await addAndCommit(commitInfo);
-    copyDirListSync(sourcePath, targetList,ignoreList);
-    await targetListCommit(__dirname,targetList,commitInfo);
-}
+superOrder(require('./Setting'),__dirname);
 ```
+
+### 备注：关于删除操作
+1. 如果此文件还没有提交到svn上，直接本地删除即可
+> 这里推荐手动删除，因为没有提交到svn，意味着只在当前目录下有此文件，手动删简单快速
+
+2. 如果此文件已提交到svn,则在`Setting.json`文件里设置`delList`即可
+> 关于这里，手动提交删除也行，不过很麻烦，因为所有targetList的版本控制里都有这一文件的提交记录，如果手动删除就需要找到涉及的目录进行删除，在这么繁琐的操作容易出问题，所以推荐利用`Setting.json`设置删除项，当前目录及所有目标目录下的提交都会删除对应文件
 
 # 实现思路
 
