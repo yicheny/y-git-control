@@ -1,11 +1,47 @@
 [TOC]
 
 # 功能目标
-//0. `提交当前代码`【支持备注】
-1. 将当前目录下所有文件复制到指定目录下并覆盖原文件
-> 已支持自动删除多余文件【其实是将原来的全删了再复制】
+1. 提交当前代码
+> 支持备注
+2. 将当前目录下所有文件复制到指定目录下并覆盖原文件
+> 已支持自动删除多余文件【其实是将原来的全删了再复制】<br/>
 > 已支持忽略指定目录【比如node_modules】
-2. 指定目录均进行版本提交
+3. 指定目录均进行版本提交
+
+# 使用
+## svn
+>  缺陷：不能在版本上进行已删除文件的提交
+
+数据（定义Setting.json文件）
+```
+{
+  "commitInfo": "测试脚本 提交target目录 第9次提交！",
+  "sourcePath": ".",
+  "targetList": [
+    "../box1/src/project-share",
+    "../box2/src/project-share",
+    "../box3/src/project-share"
+  ],
+  "ignoreList": [
+    "./node_modules"
+  ]
+}
+```
+
+指令
+```
+const {copyDirListSync} = require('./scripts/DirOpertion');
+const {addAndCommit,targetListCommit} = require('./scripts/scripts_svn');
+
+main();
+
+async function main(){
+    const {targetList,ignoreList,commitInfo,sourcePath} = require('./Setting');
+    await addAndCommit(commitInfo);
+    copyDirListSync(sourcePath, targetList,ignoreList);
+    await targetListCommit(__dirname,targetList,commitInfo);
+}
+```
 
 # 实现思路
 
