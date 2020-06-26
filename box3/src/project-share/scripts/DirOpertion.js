@@ -69,7 +69,7 @@ function delDirSync(path) {
  * @param ignoreList {Array} 忽略复制目录的数组
  */
 function copyDirListSync(source,targetList,ignoreList=[]){
-    if(!Array.isArray(targetList)) console.log('targetList必须是数组');
+    if(!Array.isArray(targetList)) return console.log('targetList必须是数组');
     targetList.forEach(target=>{
         delDirSync(target);
         copyDirSync(source,target,ignoreList);

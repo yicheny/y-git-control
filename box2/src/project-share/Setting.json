@@ -1,5 +1,5 @@
 {
-  "commitInfo": "测试脚本 提交target目录 第15次提交！",
+  "commitInfo": "测试脚本 提交target目录 第19次提交！",
   "sourcePath": ".",
   "targetList": [
     "../box1/src/project-share",
@@ -10,6 +10,6 @@
     "./node_modules"
   ],
   "delList": [
-
+    "./delete_dir"
   ]
 }
