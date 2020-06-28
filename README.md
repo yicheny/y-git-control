@@ -6,6 +6,7 @@
 2. 将当前目录下所有文件复制到指定目录下并覆盖原文件
 > 已支持自动删除多余文件【其实是将原来的全删了再复制】<br/>
 > 已支持忽略指定目录【比如node_modules】
+> 已支持忽略指定文件【比如Setting.json】
 3. 指定目录均进行版本提交
 
 # 使用
@@ -23,7 +24,8 @@
     "../box3/src/project-share"
   ],
   "ignoreList": [
-    "./node_modules"
+    "./node_modules",
+    "./Setting.json"
   ],
   "delList": []
 }
@@ -31,7 +33,7 @@
 
 指令
 ```
-const {superOrder} = require('./scripts/scripts_svn_simple');
+const {superOrder} = require('y-project-share/src/scripts_svn_simple');
 
 superOrder(require('./Setting'),__dirname);
 ```
