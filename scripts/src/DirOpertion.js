@@ -14,14 +14,12 @@ function copyDirSync(source, target, ignoreList) {
     try{
         fs.accessSync(target);
     }catch (e) {
-        // if(ignoreList.includes(source)) return;
         fs.mkdirSync(target);
     }finally{
         _copy(null, source, target);
     }
 
     function _copy(err, source, target) {
-        // if(ignoreList.includes(source)) return;
         if(err) return alertError(err);
         try{
             const paths = fs.readdirSync(source);
