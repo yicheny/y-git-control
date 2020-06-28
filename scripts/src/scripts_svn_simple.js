@@ -7,8 +7,8 @@ async function superOrder(setting,currentPath) {
     preDisposeSetting(setting);
     const {targetList,ignoreList,commitInfo,sourcePath} = setting;
 
-    await sourceCommit(delList,commitInfo);
     const delPaths = set_lock_list(Object.assign(setting, {currentPath}));
+    await sourceCommit(delPaths,commitInfo);
     copyDirListSync(sourcePath, targetList,ignoreList);
     await targetListCommit({
         source:currentPath,
