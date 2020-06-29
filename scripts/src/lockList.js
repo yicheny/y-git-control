@@ -20,7 +20,7 @@ function get_pre_commit_list(lock_list_path){
 function get_lock_list(ops={}){
     const {source='.',pre_commit_list,ignoreList} = ops;
     const current_commit_list = [];
-    const del_list = [];
+    let del_list = pre_commit_list;
     gen_list(source);
 
     return {
@@ -37,8 +37,8 @@ function get_lock_list(ops={}){
                 const stat = fs.statSync(_source);
                 if(stat.isFile()) {
                     current_commit_list.push(_source);
-                    if(pre_commit_list===null || pre_commit_list.includes(_source) || ignoreList.includes(_source)) return ;
-                    del_list.push(_source);
+                    if(del_list===null) return;
+                    del_list = del_list.filter(x=>x!==_source);
                 }
                 if(stat.isDirectory()) return gen_list(_source);
             }catch (e) {

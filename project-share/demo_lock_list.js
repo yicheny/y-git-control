@@ -3,4 +3,5 @@ const {preDisposeSetting} = require('../scripts/src/preDisposeSetting');
 
 const SETTING = require('./Setting.json');
 preDisposeSetting(SETTING);
-set_lock_list(Object.assign(SETTING, {currentPath: __dirname}));
+const del_list = set_lock_list(Object.assign(SETTING, {currentPath: __dirname}));
+console.log(del_list);
