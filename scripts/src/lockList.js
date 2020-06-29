@@ -35,12 +35,9 @@ function get_lock_list(ops={}){
             if(ignoreList.includes(_source)) return;
             try{
                 const stat = fs.statSync(_source);
-                if(stat.isFile()) {
-                    current_commit_list.push(_source);
-                    if(del_list===null) return;
-                    del_list = del_list.filter(x=>x!==_source);
-                }
-                if(stat.isDirectory()) return gen_list(_source);
+                current_commit_list.push(_source);
+                if(Array.isArray(del_list)) del_list = del_list.filter(x=>x!==_source);//无论是文件还是目录
+                if(stat.isDirectory()) return gen_list(_source)
             }catch (e) {
                 alertError(e);
             }
